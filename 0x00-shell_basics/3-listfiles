@@ -1,2 +1,11 @@
 #!/bin/bash
-ls -l
+ls -l -rwxr--r-- 1 root root 16 Mar  2 00:2
+6 0-current_working_directory        
+-rwxr-xr-x 1 root root 62 Mar  2 01:0
+4 1-listit                           
+-rwxr-xr-x 1 root root 21 Mar  2 01:2
+3 2-bring_me_home                    
+-rwxr--r-- 1 root root 18 Mar  2 01:4
+1 3-listfiles                        
+-rw-r--r-- 1 root root 38 Mar  1 23:0
+9 README.md
