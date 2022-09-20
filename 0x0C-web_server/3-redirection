@@ -4,9 +4,6 @@
 # and Configure your Nginx server so that /redirect_me is
 # redirecting to another page.
 
-#!/usr/bin/env bash
-# This script installs nginx
-
 sudo apt-get update
 sudo apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
