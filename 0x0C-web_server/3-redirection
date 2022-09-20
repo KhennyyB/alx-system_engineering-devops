@@ -4,9 +4,9 @@
 # and Configure your Nginx server so that /redirect_me is
 # redirecting to another page.
 
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 echo 'Hello World' > /var/www/html/index.html
 
 new_config=\
