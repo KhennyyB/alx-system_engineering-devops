@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installs, configures, and starts the server
-apt-get update
 apt-get -y install nginx
+apt-get update
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 service nginx restart
