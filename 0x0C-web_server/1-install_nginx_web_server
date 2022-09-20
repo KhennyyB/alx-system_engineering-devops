@@ -2,12 +2,5 @@
 # Installs, configures, and starts the server
 apt-get update
 apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-mkdir -p /var/www/html
-chmod -R 755 /var/www
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-	service nginx start
-else
-	service nginx restart
-fi
+service nginx restart
