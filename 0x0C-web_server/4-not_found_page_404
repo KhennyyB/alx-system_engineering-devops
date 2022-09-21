@@ -1,44 +1,54 @@
-#!/usr/bin/env bash
-# installs nginx and configure it to listen on port 80 make it return a page with
-# "Hello World" in it
-# and Configure your Nginx server so that /redirect_me is
-# redirecting to another page.
-# and make a 404 error page
-
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-echo 'Hello World' > /var/www/html/index.nginx-desbian.html
-
-new_config=\
-"server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-               root /var/www/html;
-        # Add index.php to the list if you are using PHP
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-        location / {
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
-                try_files \$uri \$uri/ =404;
-        }
-        error_page 404 /404.html;
-        location  /404.html {
-            internal;
-        }
-        
-        if (\$request_filename ~ redirect_me){
-            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-        }
+#1/usr/bin/env bash
+# Engine x
+apt-get update
+apt-get -y install nginx
+sudo service nginx start
+sudo ufw allow "Nginx HTTP
+sudo chown -R "SUSER":"SUSER" /var/www/html
+sudo chmod -R 755 /var /www
+echo -e "Hello World!" > /var /www/html/index. html
+echo "Ceci n'est pas une page" > /var/www/html/404 . html
+echo
+printf %s "server {
+listen 80;
+listen [::]:80 default_server;
+root /var/www/html;
+index index.html;
+location /redirect_me
+301 https://usa .youtube . com/watch ?v=QH2-TGU1WU4;
+return
 }
-"
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-echo "$new_config" > /etc/nginx/sites-available/default
+error_page 404 /494.html;
+"> /etc/nginx/s ites- enabled/default
+sudo service nginx restart
 
-if [ "$(pgrep nginx)" -le 0 ];
-then
-    service nginx start
-else
-    service nginx restart
-fi;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
