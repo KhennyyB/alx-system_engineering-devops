@@ -5,10 +5,9 @@
 # redirecting to another page.
 # and make a 404 error page
 
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-chmod -R 755 /var/www
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 echo 'Hello World' > /var/www/html/index.html
 
 new_config=\
