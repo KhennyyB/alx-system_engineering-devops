@@ -8,7 +8,7 @@ apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
 chmod -R 755 /var/www
-echo 'Hello World' > /var/www/html/index.html
+echo 'Hello World' > /var/www/html/index.nginx-desbian.html
 
 new_config=\
 "server {
