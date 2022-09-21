@@ -1,11 +1,9 @@
-#1/usr/bin/env bash
+#!/usr/bin/env bash
 # Engine x
-apt-get update
-apt-get -y install nginx
+sudo apt-get update
+sudo apt-get -y install nginx
 sudo service nginx start
 sudo ufw allow "Nginx HTTP
-sudo chown -R "SUSER":"SUSER" /var/www/html
-sudo chmod -R 755 /var /www
 echo -e "Hello World!" > /var /www/html/index.nginx-desbian.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
 echo
