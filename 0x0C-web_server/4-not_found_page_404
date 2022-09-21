@@ -6,23 +6,20 @@ sudo service nginx start
 sudo ufw allow "Nginx HTTP
 sudo chown -R "SUSER":"SUSER" /var/www/html
 sudo chmod -R 755 /var /www
-echo -e "Hello World!" > /var /www/html/index. html
-echo "Ceci n'est pas une page" > /var/www/html/404 . html
+echo -e "Hello World!" > /var /www/html/index.nginx-desbian.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 echo
 printf %s "server {
-listen 80;
-listen [::]:80 default_server;
-root /var/www/html;
-index index.html;
-location /redirect_me
-301 https://usa .youtube . com/watch ?v=QH2-TGU1WU4;
-return
-}
-error_page 404 /494.html;
+	listen 80;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html;
+	location /redirect_me {
+		return 301 https://usa .youtube . com/watch ?v=QH2-TGU1WU4;
+	}
+	error_page 404 /494.html;
 "> /etc/nginx/s ites- enabled/default
 sudo service nginx restart
-
-
 
 
 
