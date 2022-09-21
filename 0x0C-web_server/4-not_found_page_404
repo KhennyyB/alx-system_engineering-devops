@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Engine x
+# installs nginx and configure it to listen on port 80 make it return a page with
+# "Hello World" in it
+# and Configure your Nginx server so that /redirect_me is
+# redirecting to another page.
+# and make a 404 error page
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo service nginx start
