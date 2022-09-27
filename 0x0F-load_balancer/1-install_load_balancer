@@ -17,4 +17,7 @@ sed -i "/127.0.0.1 localhost/a 	3.235.25.144 25768-lb-01\n34.204.193.247 25768-w
 	echo -e "\tserver 25768-web-01 34.204.193.247:80 check"
 	echo -e "\tserver 25768-web-02 3.239.48.181:80 check"
 } >> /etc/haproxy/haproxy.cfg
+
+echo "ENABLED=1" >> /etc/default/haproxy
+
 service haproxy restart
