@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
-# Install and configure HAproxy on my lb-01 server.
-apt-get -y install haproxy
+# Installing HAproxy load balancer
+apt-get -y install --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.6
+apt-get -y install haproxy=2.6.\*
+apt-get -y update
 
-# edit config file
-server_config=\
-"
-frontend  khennyyb-frontend
-        bind *:80
-        mode http
-        default_backend khennyyb-backend
-backend khennyyb-backend
-        balance roundrobin
-        server 25768-web-01 34.204.193.247:80 check
-        server 25768-web-02 3.239.48.181:80 check
-"
- echo "$server_config" >> /etc/haproxy/haproxy.cfg
-
- # enable haproxy to be started by init script
-
- echo "ENABLED=1" >> /etc/default/haproxy
-
- sudo service haproxy restart
+sed -i "/127.0.0.1 localhost/a 	3.235.25.144 25768-lb-01\n34.204.193.247 25768-web-01\n3.239.48.181 25768-web-02" /etc/hosts
+{
+	echo -e "# HAproxy for web servers"
+	echo -e "frontend web_frontend"
+	echo -e "\tbind *:80"
+	echo -e "\tmode http"
+	echo -e "\tdefault_backend web_backend"
+	echo -e "\nbackend web_backend"
+	echo -e "\tbalance roundrobin"
+	echo -e "\tserver 25768-web-01 34.204.193.247:80 check"
+	echo -e "\tserver 25768-web-02 3.239.48.181:80 check"
+} >> /etc/haproxy/haproxy.cfg
+service haproxy restart
