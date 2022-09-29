@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
-# outputs information about domains
-# and sub domains
-
-subdomains=( "www" "lb-01" "web-01" "web-02" )
-
-runDig () {
-    subdomain=$1
-    domain=$2
-
-    dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | tail -1 | awk -v s="$subdomain" 'BEGIN { FS = " " } ; { print "The subdomain " s " is a " $4 " record and points to " $5 }'
+# Domain info fetcher
+# Fetches information about an array of subdomains.
+# 	Usage: fetch_subdomains domain subdomains
+# 	Example 1: fetch_subdomains google.com mail
+# 	Example 2: fetch_subdomains google.com 'www images maps mail'
+fetch_subdomains() {
+	domain="$1"
+	subdomains=()
+	readarray -t subdomains < <(echo "$2" | tr ' ' '\n')
+	for ((i = 0; i < "${#subdomains[@]}"; i++)) do
+		subdomain="${subdomains[i]}"
+		output_awk='{print "The subdomain", "'
+		output_awk="$output_awk$subdomain is a"
+		output_awk="$output_awk\", \$7, \"record and points to\", \$8}"
+		dig "$subdomain.$domain" \
+			| grep -A1 'ANSWER SECTION:' \
+			| tr '\n' ' ' \
+			| awk "$output_awk"
+	done
 }
 
-if [ $# -eq 1 ]; then
-    domain="$1"
-    for s in "${subdomains[@]}"
-    do
-	runDig "$s" "$domain"
-    done
-elif [ $# -eq 2 ]; then
-    domain="$1"
-    subdomain="$2"
-    runDig "$subdomain" "$domain"
+if [ "${#BASH_ARGV[@]}" -ge '2' ]; then
+	fetch_subdomains "$1" "$2"
+elif [ "${#BASH_ARGV[@]}" -ge '1' ]; then
+	fetch_subdomains "$1" "www lb-01 web-01 web-02"
+else
+	exit
 fi
