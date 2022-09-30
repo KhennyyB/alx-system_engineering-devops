@@ -22,7 +22,7 @@ exec { 'allow HTTP':
 }
 
 # create index file
-file { '/var/www/html/index.nginx-desbian.html':
+file { '/var/www/html/index.html':
   ensure  => file,
   content => "Hello World!\n",
 }
