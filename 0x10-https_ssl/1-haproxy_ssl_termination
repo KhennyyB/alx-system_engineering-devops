@@ -33,17 +33,13 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  khennyyb.tech-frontend-http
-        bind *:80
-        http-request set-header X-Forwarded-Proto http
-        default_backend khennyyb.tech-backend
-
-frontend  khennyyb.tech-frontend-https
-        bind *:443 ssl crt etc/letsencrypt/csr/0000_csr-certbot.pem
-        http-request set-header X-Forwarded-Proto https
-        default_backend khennyyb.tech-backend
-
+#--khennyyb.tech-params-begin--
 backend khennyyb.tech-backend
         balance roundrobin
         server 25768-web-01 34.204.193.247:80 check
         server 25768-web-02 3.239.48.181:80 check
+frontend khennyyb.tech-frontend-http
+        bind *:443 ssl crt 
+        mode http
+        default_backend khennyyb.tech-backend
+#--khennyyb.tech-params-end--
