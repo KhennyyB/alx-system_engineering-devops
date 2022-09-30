@@ -10,14 +10,14 @@ CONFIG_FILE='/etc/haproxy/haproxy.cfg'
 HAPROXY_LB_CONFIG=\
 "
 #--$DOMAIN_NAME-params-begin--
-backend $DOMAIN_NAME_backend
+backend $DOMAIN_NAME-backend
 	balance roundrobin
 	server 25768-web-01 34.204.193.247:80 check
 	server 25768-web-02 44.200.136.167:80 check
-frontend $DOMAIN_NAME_frontend
+frontend $DOMAIN_NAME-frontend
 	bind *:80
 	mode http
-	default_backend $DOMAIN_NAME_backend
+	default_backend web_backend
 #--$DOMAIN_NAME-params-end--
 "
 
