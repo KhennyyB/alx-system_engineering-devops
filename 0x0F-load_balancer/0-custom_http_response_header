@@ -1,29 +1,27 @@
 #!/usr/bin/env bash
-# Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
-# The name of the custom HTTP header must be X-Served-By
-# The value of the custom HTTP header must be the hostname of the server Nginx is running on
-#sudo sed -i 's/server_name _;.*/server_name _;\n\tadd_header X-Served-By \$hostname;/' /etc/nginx/sites-enabled/default 
+#Script to configure web-02 exactly like web-01
+
 sudo apt-get update
 sudo apt-get -y install nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 echo -e "Ceci n'est pas une page" > /var/www/html/error-page.html
 echo "server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-        index index.html index.htm index.nginx-debian.html
-        server_name _;
-	location / {
-                        try_files \$uri \$uri/ =404;
-                        add_header X-Served-By \$hostname;
-                }
-                if (\$request_filename ~ redirect_me) {
-                        rewrite ^ https://theweirdnerd.tech permanent;
-                }
-                error_page 404 /error-page.html;
-                location = /error-page.html{
-                        root /var/www/html;
-                        internal;
-                }
-        }" > /etc/nginx/sites-enabled/default
-sudo service nginx restart
+		listen 80 default_server;
+	        listen [::]:80 default_server;
+		root /var/www/html;
+		index index.html index.htm index.nginx-debian.html;
+		server_name _;
+		location / {
+			try_files \$uri \$uri/ =404;
+			add_header X-Served-By \$hostname;
+		}
+		if (\$request_filename ~ redirect_me) {
+			rewrite ^ https://khennyyb.tech permanent;
+		}
+		error_page 404 /error-page.html;
+		location = /error-page.html{
+			root /var/www/html;
+			internal;
+		}
+	}" > /etc/nginx/sites-available/default
+service nginx restart
