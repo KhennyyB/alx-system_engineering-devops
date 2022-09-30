@@ -39,7 +39,7 @@ frontend  khennyyb.tech-frontend-http
         default_backend khennyyb.tech-backend
 
 frontend  khennyyb.tech-frontend-https
-        bind *:443 ssl crt /etc/ssl/www.khennyyb.tech/www.khennyyb.tech.pem
+        bind *:443 ssl crt etc/letsencrypt/csr/0000_csr-certbot.pem
         http-request set-header X-Forwarded-Proto https
         default_backend khennyyb.tech-backend
 
