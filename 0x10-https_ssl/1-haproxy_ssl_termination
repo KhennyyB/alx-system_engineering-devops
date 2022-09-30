@@ -35,12 +35,12 @@ defaults
 
 
 #--khennyyb.tech-params-begin--
-backend khennyyb.tech-backend
+backend web-backend
         balance roundrobin
         server 25768-web-01 34.204.193.247:80 check
-        server 25768-web-02 3.239.48.181:80 check
-frontend khennyyb.tech-frontend
-        bind *:443 ssl crt /etc/letsencrypt/live/www.khennyyb.tech/fullchain.pem
+        server 25768-web-02 44.200.136.167:80:80 check
+frontend web-frontend
+        bind *:443 ssl crt /etc/letsencrypt/live/www.khennyyb.tech/haproxy.pem
         mode http
-        default_backend khennyyb.tech-backend
+        default_backend web_backend
 #--khennyyb.tech-params-end--
