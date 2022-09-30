@@ -16,7 +16,7 @@ echo "server {
 			add_header X-Served-By \$hostname;
 		}
 		if (\$request_filename ~ redirect_me) {
-			rewrite ^ https://khennyyb.tech permanent;
+			rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
 		}
 		error_page 404 /error-page.html;
 		location = /error-page.html{
