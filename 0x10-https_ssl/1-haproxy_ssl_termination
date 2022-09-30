@@ -39,7 +39,7 @@ backend khennyyb.tech-backend
         balance roundrobin
         server 25768-web-01 34.204.193.247:80 check
         server 25768-web-02 3.239.48.181:80 check
-frontend khennyyb.tech-frontend-http
+frontend khennyyb.tech-frontend
         bind *:443 ssl crt /etc/letsencrypt/live/www.khennyyb.tech/fullchain.pem
         mode http
         default_backend khennyyb.tech-backend
