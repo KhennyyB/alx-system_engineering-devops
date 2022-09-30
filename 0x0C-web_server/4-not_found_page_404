@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
-# installs nginx and configure it to listen on port 80 make it return a page with
-# "Hello World" in it
-# and Configure your Nginx server so that /redirect_me is
-# redirecting to another page.
-# and make a 404 error page
+# A script to configure Nginx server so that /redirect_me is redirecting to another page
+
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo service nginx start
-sudo ufw allow "Nginx HTTP"
-echo -e "Hello World!" > /var/www/html/index.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-printf %s "server {
-	listen 80;
-	listen [::]:80 default_server;
-	root /var/www/html;
-	index index.html;
-	location /redirect_me {
-	    return 301 https://www.youtube.com/watch?v=QH2-TGU1WU4;
-	}
-	error_page 404 /404.html;
-}" > /etc/nginx/sites-enabled/default
-sudo service nginx restart
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo -e "Ceci n'est pas une page" > /var/www/html/error-page.html
+echo "server {
+		listen 80 default_server;
+	        listen [::]:80 default_server;
+		root /var/www/html;
+		index index.html index.htm index.nginx-debian.html;
+		server_name _;
+		if (\$request_filename ~ redirect_me) {
+			rewrite ^ https://khennyyb.tech permanent;
+		}
+		error_page 404 /error-page.html;
+		location = /error-page.html{
+			root /var/www/html;
+			internal;
+		}
+	}" > /etc/nginx/sites-available/default
+service nginx restart
