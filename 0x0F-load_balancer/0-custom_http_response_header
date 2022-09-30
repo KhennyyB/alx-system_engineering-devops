@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Script to configure web-02 exactly like web-01
+# Script to configure web-02 exactly like web-01
 
 sudo apt-get update
 sudo apt-get -y install nginx
