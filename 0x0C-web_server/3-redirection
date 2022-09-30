@@ -7,9 +7,9 @@ echo "Hello World!" > /var/www/html/index.html
 echo "server {
 		listen 80 default_server;
 	        listen [::]:80 default_server;
-		root /var/www/khennyyb.tech/html;
+		root /var/www/html;
 		index index.html index.htm index.nginx-debian.html;
-		server_name khennyyb.tech www.khennyyb.tech;
+		server_name _;
 		if (\$request_filename ~ redirect_me) {
 			rewrite ^ https://khennyyb.tech permanent;
 		}
