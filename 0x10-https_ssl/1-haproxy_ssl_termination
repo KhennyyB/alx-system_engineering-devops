@@ -42,5 +42,5 @@ frontend web-frontend
 backend web-backend
         balance roundrobin
         server 25768-web-01 34.204.193.247:80 check
-        server 25768-web-02 44.200.136.167:80:80 check
+        server 25768-web-02 44.200.136.167:80 check
 #--khennyyb.tech-params-end--
