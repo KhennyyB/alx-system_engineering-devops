@@ -37,7 +37,7 @@ defaults
 frontend khennyyb.tech-frontend
         bind *:80
         bind *:443 ssl crt /etc/letsencrypt/live/www.khennyyb.tech/haproxy.pem
-        redirect scheme https if !{ ssl_fc }
+        redirect scheme https code 301 if !{ ssl_fc }
         mode http
         default_backend khennyyb.tech-backend
 backend khennyyb.tech-backend
