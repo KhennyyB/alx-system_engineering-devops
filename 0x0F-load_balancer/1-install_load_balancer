@@ -4,7 +4,7 @@ apt-get update
 apt-get -y install --no-install-recommends software-properties-common
 add-apt-repository -y ppa:vbernat/haproxy-2.4
 apt-get -y install haproxy
-DOMAIN_NAME='web'
+DOMAIN_NAME='khennyyb.tech'
 INIT_FILE='/etc/default/haproxy'
 CONFIG_FILE='/etc/haproxy/haproxy.cfg'
 HAPROXY_LB_CONFIG=\
@@ -17,7 +17,7 @@ backend $DOMAIN_NAME-backend
 frontend $DOMAIN_NAME-frontend
 	bind *:80
 	mode http
-	default_backend web_backend
+	default_backend $DOMAIN_NAME-backend
 #--$DOMAIN_NAME-params-end--
 "
 
