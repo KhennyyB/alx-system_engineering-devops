@@ -9,8 +9,8 @@ server {
                         add_header X-Served-By $hostname;
                 }
                 location /airbnb-onepage/ {
-                        proxy_pass http://localhost:5000;
-        }
+                proxy_pass http://localhost:5000;
+                }
                 if ($request_filename ~ redirect_me) {
                         rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
                 }
