@@ -1,0 +1,28 @@
+server {
+                listen 80 default_server;
+                listen [::]:80 default_server;
+                root /var/www/html;
+                index index.html index.htm index.nginx-debian.html;
+                server_name _;
+                location / {
+                        try_files $uri $uri/ =404;
+                        add_header X-Served-By $hostname;
+                }
+                location /airbnb-onepage/ {
+                proxy_pass http://localhost:5000;
+                }
+                location /airbnb-dynamic/ {
+                proxy_pass http://localhost:5001/;
+                }
+                location /api/ {
+                proxy_pass http://localhost:5002;
+                }
+                if ($request_filename ~ redirect_me) {
+                        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+                }
+                error_page 404 /error-page.html;
+                location = /error-page.html{
+                        root /var/www/html;
+                        internal;
+                }
+        }
