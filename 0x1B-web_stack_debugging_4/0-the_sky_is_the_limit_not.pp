@@ -1,6 +1,11 @@
-# Fixes an nginx site that can't handle multiple concurrent requests
-exec { 'fix--for-nginx':
-  command => "bash -c \"sed -iE 's/^ULIMIT=.*/ULIMIT=\\\"-n 8192\\\"/' \
-/etc/default/nginx; service nginx restart\"",
-  path    => '/usr/bin:/usr/sbin:/bin'
+# change the limit ofopen files in nginx config
+exec {'change limit':
+  command  => "sudo sed -i 's/ULIMIT=\"-n 15\"/ULIMIT=\"-n 4096\"/g' /etc/default/nginx",
+  provider => shell
+}
+
+# restart service
+exec {'restart service':
+  command  => 'sudo service nginx restart',
+  provider => shell
 }
